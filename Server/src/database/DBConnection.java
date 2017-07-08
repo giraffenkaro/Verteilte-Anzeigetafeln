@@ -25,7 +25,7 @@ public class DBConnection {
      * Connect to database
      * @throws DatabaseConnectionException
      */
-    public void openDB() throws DatabaseConnectionException {
+    public synchronized void openDB() throws DatabaseConnectionException {
         try {
             if (isOpen()) {
                 con.close();
@@ -44,7 +44,7 @@ public class DBConnection {
      * Close connection to database
      * @throws DatabaseConnectionException
      */
-    public void closeDB() throws DatabaseConnectionException {
+    public synchronized void closeDB() throws DatabaseConnectionException {
         try {
             if (isOpen()) {
                 con.close();
@@ -60,7 +60,7 @@ public class DBConnection {
      * Check if connected to database
      * @return connected
      */
-    public boolean isOpen() {
+    public synchronized boolean isOpen() {
         try {
             if (con != null && !con.isClosed()){
                 return true;
@@ -76,7 +76,7 @@ public class DBConnection {
      * @return ResultSet
      * @throws DatabaseConnectionException
      */
-    public ResultSet executeQuery(String sql) throws DatabaseConnectionException, DatabaseException {
+    public synchronized ResultSet executeQuery(String sql) throws DatabaseConnectionException, DatabaseException {
         if (isOpen()) {
             try {
                 Statement statement = con.createStatement();
@@ -96,7 +96,7 @@ public class DBConnection {
      * @param sql sql update
      * @throws DatabaseConnectionException
      */
-    public void executeUpdate(String sql) throws DatabaseConnectionException, DatabaseException {
+    public synchronized void executeUpdate(String sql) throws DatabaseConnectionException, DatabaseException {
         if (isOpen()) {
             try {
                 Statement statement = null;
@@ -117,7 +117,7 @@ public class DBConnection {
      * @param sql sql insert
      * @throws DatabaseConnectionException
      */
-    public void executeInsert(String sql) throws DatabaseConnectionException, DatabaseException {
+    public synchronized void executeInsert(String sql) throws DatabaseConnectionException, DatabaseException {
         executeUpdate(sql);
     }
 }

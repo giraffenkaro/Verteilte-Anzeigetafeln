@@ -54,6 +54,14 @@ public class User {
     }
 
     /**
+     * Get user password
+     * @return password
+     */
+    public String getPassword() {
+        return this.password;
+    }
+
+    /**
      * Checks if given password equals saved password
      * @param password password
      * @return password equals

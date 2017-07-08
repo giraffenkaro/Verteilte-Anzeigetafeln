@@ -1,14 +1,12 @@
 package database;
 
 import database.exceptions.DatabaseConnectionException;
-import database.exceptions.DatabaseException;
 import database.exceptions.DatabaseObjectNotFoundException;
 import database.exceptions.DatabaseObjectNotSavedException;
 import database.objects.User;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author D.Bergum
@@ -22,7 +20,7 @@ public class Database {
      * Connect to database
      * @throws DatabaseConnectionException
      */
-    public  Database() throws DatabaseConnectionException {
+    public Database() throws DatabaseConnectionException {
         dbcon = new DBConnection();
         dbcon.openDB();
     }
@@ -30,7 +28,7 @@ public class Database {
     /**
      * Close connection to database
      */
-    public void closeDB() {
+    public synchronized void closeDB() {
         try {
             dbcon.closeDB();
         } catch (DatabaseConnectionException e) {
@@ -45,7 +43,7 @@ public class Database {
      * @throws DatabaseObjectNotFoundException
      * @throws DatabaseConnectionException
      */
-    public User getUserById(int id) throws DatabaseObjectNotFoundException, DatabaseConnectionException {
+    public synchronized User getUserById(int id) throws DatabaseObjectNotFoundException, DatabaseConnectionException {
         if (!dbcon.isOpen()) {
             throw new DatabaseConnectionException("Not connected to database.");
         }
@@ -67,7 +65,7 @@ public class Database {
      * @throws DatabaseObjectNotFoundException
      * @throws DatabaseConnectionException
      */
-    public ArrayList<User> getUsers() throws DatabaseObjectNotFoundException, DatabaseConnectionException {
+    public synchronized ArrayList<User> getUsers() throws DatabaseObjectNotFoundException, DatabaseConnectionException {
         if (!dbcon.isOpen()) {
             throw new DatabaseConnectionException("Not connected to database.");
         }
@@ -93,7 +91,7 @@ public class Database {
      * @throws DatabaseObjectNotFoundException
      * @throws DatabaseConnectionException
      */
-    public ArrayList<User> getUsersByLevel(int level) throws DatabaseObjectNotFoundException, DatabaseConnectionException {
+    public synchronized ArrayList<User> getUsersByLevel(int level) throws DatabaseObjectNotFoundException, DatabaseConnectionException {
         if (!dbcon.isOpen()) {
             throw new DatabaseConnectionException("Not connected to database.");
         }
@@ -119,16 +117,16 @@ public class Database {
      * @throws IllegalArgumentException
      * @throws DatabaseConnectionException
      */
-    public void saveUser(User user) throws DatabaseObjectNotSavedException, IllegalArgumentException, DatabaseConnectionException {
+    public synchronized void saveUser(User user) throws DatabaseObjectNotSavedException, IllegalArgumentException, DatabaseConnectionException {
         if (!dbcon.isOpen()) {
             throw new DatabaseConnectionException("Not connected to database.");
         }
         if (user != null) {
             try {
                 if (user.getID() == -1) {
-                    dbcon.executeInsert("");
+                    dbcon.executeInsert("INSERT INTO User (name, password, level) VALUES ('" + user.getName() + "','" + user.getPassword() + "','" + user.getLevel() + "');");
                 } else {
-                    dbcon.executeUpdate("");
+                    dbcon.executeUpdate("UPDATE User SET name = " + user.getName() + ", password = " + user.getPassword() + ", level = " + user.getLevel() + " WHERE id = " + user.getID() + ";");
                 }
             } catch (Exception e) {
                 throw new DatabaseObjectNotSavedException();
