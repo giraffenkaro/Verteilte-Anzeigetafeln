@@ -22,7 +22,18 @@ public class Database {
      */
     public Database() throws DatabaseConnectionException {
         dbcon = new DBConnection();
-        dbcon.openDB();
+        this.openDB();
+    }
+
+    /**
+     *Connect to database
+     */
+    public synchronized void openDB() {
+        try {
+            dbcon.openDB();
+        } catch (DatabaseConnectionException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

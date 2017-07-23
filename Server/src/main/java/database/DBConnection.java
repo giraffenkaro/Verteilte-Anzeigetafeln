@@ -35,6 +35,7 @@ public class DBConnection {
             con = DriverManager.getConnection("jdbc:sqlite:database.db");
             con.setAutoCommit(false);
         } catch ( Exception e ) {
+            e.printStackTrace();
             throw new DatabaseConnectionException("Could not open database.");
         }
         System.out.println("Opened database successfully.");
@@ -118,6 +119,18 @@ public class DBConnection {
      * @throws DatabaseConnectionException
      */
     public synchronized void executeInsert(String sql) throws DatabaseConnectionException, DatabaseException {
-        executeUpdate(sql);
+        if (isOpen()) {
+            try {
+                Statement statement = null;
+                statement = con.createStatement();
+                statement.executeUpdate(sql);
+                statement.close();
+                con.commit();
+            } catch (SQLException e) {
+                throw new DatabaseException("Can't execute insert.");
+            }
+        } else {
+            throw  new DatabaseConnectionException("Not connected to database.");
+        }
     }
 }

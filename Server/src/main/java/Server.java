@@ -7,18 +7,18 @@ import threads.ServerThread;
  */
 public class Server {
 
-    public static void Main (String[] args){
+    public static void main (String[] args){
         Database database = null;
         try {
             database = new Database();
-            try {
+            /*try {
                 ServerThread server = new ServerThread(database);
                 server.run();
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
                 database.closeDB();
-            }
+            }*/
         } catch (DatabaseConnectionException e) {
             e.printStackTrace();
         }
