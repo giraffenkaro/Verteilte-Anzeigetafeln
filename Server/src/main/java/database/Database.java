@@ -30,7 +30,9 @@ public class Database {
      */
     public synchronized void openDB() {
         try {
-            dbcon.openDB();
+            if (!dbcon.isOpen()) {
+                dbcon.openDB();
+            }
         } catch (DatabaseConnectionException e) {
             e.printStackTrace();
         }
@@ -59,13 +61,18 @@ public class Database {
             throw new DatabaseConnectionException("Not connected to database.");
         }
         try {
-            ResultSet rs = dbcon.executeQuery("SELECT * FROM User WHERE id = " + id + ";");
+            ResultSet rs = dbcon.execute("SELECT * FROM User WHERE id = " + id + ";");
             if (rs.next()) {
-                return new User(rs.getInt("id"), rs.getString("name"), rs.getString("password"), rs.getInt("level"));
+                User u = new User(rs.getInt("id"), rs.getString("name"), rs.getString("password"), rs.getInt("level"));
+                rs.close();
+                dbcon.free();
+                return u;
             } else {
+                rs.close();
                 throw new DatabaseObjectNotFoundException();
             }
         } catch (Exception e) {
+            dbcon.free();
             throw new DatabaseObjectNotFoundException();
         }
     }
@@ -82,15 +89,18 @@ public class Database {
         }
         try {
             ArrayList<User> users = new ArrayList<User>();
-            ResultSet rs = dbcon.executeQuery("SELECT * FROM User;");
+            ResultSet rs = dbcon.execute("SELECT * FROM User;");
             while (rs.next()) {
                 users.add(new User(rs.getInt("id"), rs.getString("name"), rs.getString("password"), rs.getInt("level")));
             }
+            rs.close();
+            dbcon.free();
             if (users.size() > 0) {
                 return users;
             }
             throw new DatabaseObjectNotFoundException();
         } catch (Exception e) {
+            dbcon.free();
             throw new DatabaseObjectNotFoundException();
         }
     }
@@ -108,15 +118,18 @@ public class Database {
         }
         try {
             ArrayList<User> users = new ArrayList<User>();
-            ResultSet rs = dbcon.executeQuery("SELECT * FROM User WHERE level = " + level + ";");
+            ResultSet rs = dbcon.execute("SELECT * FROM User WHERE level = " + level + ";");
             while (rs.next()) {
                 users.add(new User(rs.getInt("id"), rs.getString("name"), rs.getString("password"), rs.getInt("level")));
             }
+            rs.close();
+            dbcon.free();
             if (users.size() > 0) {
                 return users;
             }
             throw new DatabaseObjectNotFoundException();
         } catch (Exception e) {
+            dbcon.free();
             throw new DatabaseObjectNotFoundException();
         }
     }
@@ -135,9 +148,9 @@ public class Database {
         if (user != null) {
             try {
                 if (user.getID() == -1) {
-                    dbcon.executeInsert("INSERT INTO User (name, password, level) VALUES ('" + user.getName() + "','" + user.getPassword() + "','" + user.getLevel() + "');");
+                    dbcon.execute("INSERT INTO User (name, password, level) VALUES ('" + user.getName() + "','" + user.getPassword() + "','" + user.getLevel() + "');");
                 } else {
-                    dbcon.executeUpdate("UPDATE User SET name = " + user.getName() + ", password = " + user.getPassword() + ", level = " + user.getLevel() + " WHERE id = " + user.getID() + ";");
+                    dbcon.execute("UPDATE User SET name = " + user.getName() + ", password = " + user.getPassword() + ", level = " + user.getLevel() + " WHERE id = " + user.getID() + ";");
                 }
             } catch (Exception e) {
                 throw new DatabaseObjectNotSavedException();
