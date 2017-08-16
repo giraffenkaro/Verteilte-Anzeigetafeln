@@ -82,6 +82,7 @@ public class Server implements Functions
     @Override
     public String addUser(String name) throws RemoteException
     {
+
         return null;
     }
 
