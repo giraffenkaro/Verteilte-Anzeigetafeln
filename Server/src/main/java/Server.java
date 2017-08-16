@@ -53,7 +53,7 @@ public class Server implements Functions
             Registry registry = LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
             registry.rebind("Functions", stub);
 
-            System.err.println("Server läuft");
+            System.err.println("Server laeuft");
         } catch (Exception e)
         {
             System.err.println("Server exception: " + e.toString());
