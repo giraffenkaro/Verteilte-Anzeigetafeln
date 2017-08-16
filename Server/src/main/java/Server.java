@@ -64,73 +64,73 @@ public class Server implements Functions
     @Override
     public String getMessages(int boardID) throws RemoteException
     {
-        return null;
+        return "getMesseages( " + boardID + " )" ;
     }
 
     @Override
     public String deleteMessages(int boardID, int userID, int messageID) throws RemoteException
     {
-        return null;
+        return "deleteMessages ( " + boardID +"," +  userID + "," + messageID + " )";
     }
 
     @Override
-    public String addMessage(int boardID, int UserID, String message) throws RemoteException
+    public String addMessage(int boardID, int userID, String message) throws RemoteException
     {
-        return null;
+        return "addMessage ( " + boardID + "," + userID + "," + message + " )";
     }
 
     @Override
     public String addUser(String name) throws RemoteException
     {
 
-        return null;
+        return "addUser ( " + name + ")";
     }
 
     @Override
     public String deleteUser(int userID) throws RemoteException
     {
-        return null;
+        return "deleteUser (" + userID + ")";
     }
 
     @Override
-    public String changePassword(int userID) throws RemoteException
+    public String changePassword(String name, String password) throws RemoteException
     {
-        return null;
+        return "changePassword (" + name + "," + password + ")" ;
     }
 
     @Override
-    public String setMod(int UserID) throws RemoteException
+    public String setMod(int userID) throws RemoteException
     {
-        return null;
+        return "setMod (" + userID + ")";
     }
 
     @Override
     public String addGroup(String name, int modID) throws RemoteException
     {
-        return null;
+        return "addGroup (" + name + "," + modID + ")";
     }
 
     @Override
     public String setGroup(String name, int groupID) throws RemoteException
     {
-        return null;
+        return "setGroup (" + name + "," + groupID + ")";
     }
 
     @Override
     public String changeGroup(String name, int userID, int groupID) throws RemoteException
     {
-        return null;
+        return "changeGroup (" + name + "," + userID + "," + groupID + ")";
     }
 
     @Override
     public String addBoard(String name, int groupID) throws RemoteException
     {
-        return null;
+        return "addBoard(" + name + "," + groupID + ")";
     }
 
     @Override
     public String deleteBoard(int boardID)
     {
-        return null;
+        return "deleteBoard ( " + boardID + ")";
     }
 }
