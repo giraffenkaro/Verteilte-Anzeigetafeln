@@ -19,7 +19,11 @@ public class Message {
 
 
     public Message(String message, User author){
-        this(-1,message,null,author);
+        this(-1, message,null, author);
+    }
+
+    public Message(String message, User author, Group group){
+        this(-1, message, group, author);
     }
 
     /**
