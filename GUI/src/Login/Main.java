@@ -1,5 +1,7 @@
 package Login;
 
+import javax.swing.*;
+
 /**
  * Created with IntelliJ IDEA
  * User:   Yannick Neumann

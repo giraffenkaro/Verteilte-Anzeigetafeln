@@ -28,7 +28,7 @@ public class LoginGUI extends JFrame
 
     public LoginGUI()
     {
-        addPanel();
+        createPanel();
         addUserID();
         addUserPW();
         addJLable();
@@ -40,7 +40,6 @@ public class LoginGUI extends JFrame
     public void addUserID()
     {
         txtUserID = new JTextField();
-        GridBagConstraints gbc;
         gbc = new GridBagConstraints();
         gbc.gridx = 3;
         gbc.gridy = 0;
@@ -51,7 +50,7 @@ public class LoginGUI extends JFrame
         mainPanel.add(txtUserID, gbc);
     }
 
-    public void addPanel()
+    public void createPanel()
     {
         mainPanel = new JPanel();
         mainPanel.setLayout(new GridBagLayout());
@@ -160,8 +159,6 @@ public class LoginGUI extends JFrame
     public void setFrameClear()
     {
         frame.dispose();
-        //TODO evt Login und Edit auf einem Frame machen
-        //frame.getContentPane().removeAll();
     }
 
     public void setVisibleFrame()

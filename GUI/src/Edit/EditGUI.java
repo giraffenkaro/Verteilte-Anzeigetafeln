@@ -27,13 +27,29 @@ public class EditGUI extends JFrame
     private JButton closeButton;
     private JButton cancelButton;
     private JButton deleteButton;
+    private GridBagConstraints gbc;
+    private DefaultListModel<String> defaultListModel1;
 
     public EditGUI()
+    {
+        createPanel();
+        addJLable();
+        addScrollPaneList();
+        addScrollPaneTextArea();
+        addButtons();
+        addCombobox();
+        addListener();
+    }
+
+    public void createPanel ()
     {
         editPanel = new JPanel();
         editPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc;
+    }
 
+    public void addJLable ()
+    {
         final JLabel scoreBoardNews = new JLabel();
         scoreBoardNews.setText("Nachrichten auf Anzeigetafel");
         gbc = new GridBagConstraints();
@@ -53,7 +69,10 @@ public class EditGUI extends JFrame
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(10, 0, 5, 0);
         editPanel.add(editPostLabel, gbc);
+    }
 
+    public void addScrollPaneList ()
+    {
         JScrollPane scrollPane1 = new JScrollPane();
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
@@ -65,7 +84,7 @@ public class EditGUI extends JFrame
 
         //TODO in JTabble in einer spalte ändern um es zu editieren
         list1 = new JList<String>();
-        DefaultListModel<String> defaultListModel1 = new DefaultListModel<>();
+        defaultListModel1 = new DefaultListModel<>();
         defaultListModel1.addElement("test");
         defaultListModel1.addElement("test1");
         defaultListModel1.addElement("test2");
@@ -83,7 +102,10 @@ public class EditGUI extends JFrame
         list1.setModel(defaultListModel1);
         list1.setSelectionMode(0);
         scrollPane1.setViewportView(list1);
+    }
 
+    public void addScrollPaneTextArea ()
+    {
         JScrollPane scrollPane2 = new JScrollPane();
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
@@ -98,7 +120,11 @@ public class EditGUI extends JFrame
         textArea1.setRows(3);
         textArea1.setWrapStyleWord(false);
         scrollPane2.setViewportView(textArea1);
+    }
 
+
+    public void addButtons ()
+    {
         postButton = new JButton();
         postButton.setBackground(new Color(-9911320));
         postButton.setText("Post");
@@ -118,7 +144,7 @@ public class EditGUI extends JFrame
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 0, 10, 10);
         editPanel.add(deleteButton, gbc);
-        
+
         editButton = new JButton();
         editButton.setBackground(new Color(-9911320));
         editButton.setText("Edit");
@@ -138,7 +164,42 @@ public class EditGUI extends JFrame
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 0, 10, 10);
         editPanel.add(openButton, gbc);
- 
+
+        saveButton = new JButton();
+        saveButton.setBackground(new Color(-9911320));
+        saveButton.setText("Save");
+        saveButton.setVisible(false);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 3;
+        gbc.gridy = 6;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 0, 10, 10);
+        editPanel.add(saveButton, gbc);
+
+        cancelButton = new JButton();
+        cancelButton.setBackground(new Color(-9911320));
+        cancelButton.setText("Cancel");
+        cancelButton.setVisible(false);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 4;
+        gbc.gridy = 6;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 0, 10, 10);
+        editPanel.add(cancelButton, gbc);
+
+        closeButton = new JButton();
+        closeButton.setBackground(new Color(-9911320));
+        closeButton.setText("Close");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 5;
+        gbc.gridy = 6;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 0, 10, 0);
+        editPanel.add(closeButton, gbc);
+    }
+
+    public void addCombobox()
+    {
         comboBox1 = new JComboBox<String>();
         comboBox1.setBackground(new Color(0x68C3E8));
         DefaultComboBoxModel<String> defaultComboBoxModel1 = new DefaultComboBoxModel<String>();
@@ -155,39 +216,10 @@ public class EditGUI extends JFrame
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 0, 10, 0);
         editPanel.add(comboBox1, gbc);
-        
-        saveButton = new JButton();
-        saveButton.setBackground(new Color(-9911320));
-        saveButton.setText("Save");
-        saveButton.setVisible(false);
-        gbc = new GridBagConstraints();
-        gbc.gridx = 3;
-        gbc.gridy = 6;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(10, 0, 10, 10);
-        editPanel.add(saveButton, gbc);
-        
-        cancelButton = new JButton();
-        cancelButton.setBackground(new Color(-9911320));
-        cancelButton.setText("Cancel");
-        cancelButton.setVisible(false);
-        gbc = new GridBagConstraints();
-        gbc.gridx = 4;
-        gbc.gridy = 6;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(10, 0, 10, 10);
-        editPanel.add(cancelButton, gbc);
-        
-        closeButton = new JButton();
-        closeButton.setBackground(new Color(-9911320));
-        closeButton.setText("Close");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 5;
-        gbc.gridy = 6;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(10, 0, 10, 0);
-        editPanel.add(closeButton, gbc);
+    }
 
+    public void addListener ()
+    {
         openButton.setActionCommand("open");
         editButton.setActionCommand("edit");
         postButton.setActionCommand("post");
@@ -204,7 +236,7 @@ public class EditGUI extends JFrame
         saveButton.addActionListener(crtl);
         cancelButton.addActionListener(crtl);
         deleteButton.addActionListener(crtl);
-        //TODO wahrscheinlich auslagern in andere klasse 
+        //TODO wahrscheinlich auslagern in andere klasse
         //comboBox1.addActionListener(crtl);
     }
 

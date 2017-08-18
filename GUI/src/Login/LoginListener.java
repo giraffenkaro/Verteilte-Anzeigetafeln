@@ -1,6 +1,7 @@
 package Login;
 
 import Edit.EditGUI;
+import sun.rmi.runtime.Log;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,6 +15,7 @@ import java.awt.event.ActionListener;
  */
 public class LoginListener implements ActionListener
 {
+    private LoginGUI loginGUI;
     public void actionPerformed(ActionEvent e)
     {
         JButton eSource = (JButton) e.getSource();
@@ -22,6 +24,7 @@ public class LoginListener implements ActionListener
         {
             EditGUI test = new EditGUI();
             test.start();
+            loginGUI.setFrameClear();
         }
         if (eSource.getActionCommand().equals("cancel"))
         {
@@ -31,11 +34,6 @@ public class LoginListener implements ActionListener
             {
                 System.exit(0);
             }
-        }
-        if (eSource.getActionCommand().equals("login"))
-        {
-
-
         }
     }
 }
