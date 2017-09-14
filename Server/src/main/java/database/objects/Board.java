@@ -10,6 +10,13 @@ public class Board {
     private Group group;
     private User user;
 
+    /**
+     * Create board (with given ID -> Update board in database)
+     * @param id
+     * @param name
+     * @param group
+     * @param user
+     */
     public Board(int id, String name, Group group, User user) {
         setID(id);
         setName(name);
@@ -17,10 +24,20 @@ public class Board {
         setGroup(group);
     }
 
+    /**
+     * Create group board (with ID -1 -> Save as new board in database)
+     * @param name
+     * @param group
+     */
     public Board(String name, Group group){
         this(-1,name,group,null);
     }
 
+    /**
+     * Create user board (with ID -1 -> Save as new board in database)
+     * @param name
+     * @param user
+     */
     public Board(String name, User user){
         this(-1,name,null,user);
     }

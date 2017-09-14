@@ -10,6 +10,13 @@ public class Message {
     private User author;
     private Group group;
 
+    /**
+     * Create message (with given ID -> Update message in database)
+     * @param id
+     * @param message
+     * @param group
+     * @param author
+     */
     public Message(int id, String message, Group group, User author) {
         setID(id);
         setMessage(message);
@@ -18,10 +25,21 @@ public class Message {
     }
 
 
+    /**
+     * Create  message (with ID -1 -> Save as new message in database)
+     * @param message
+     * @param author
+     */
     public Message(String message, User author){
         this(-1, message,null, author);
     }
 
+    /**
+     * Create  group message (with ID -1 -> Save as new message in database)
+     * @param message
+     * @param author
+     * @param group
+     */
     public Message(String message, User author, Group group){
         this(-1, message, group, author);
     }
