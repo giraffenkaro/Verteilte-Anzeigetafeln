@@ -162,13 +162,18 @@ public class DBConnection {
      * @param sql sql insert
      * @throws DatabaseConnectionException
      */
-    private void executeInsert(String sql) throws DatabaseConnectionException, DatabaseException {
+    private ResultSet executeInsert(String sql) throws DatabaseConnectionException, DatabaseException {
         if (isOpen()) {
             try {
                 statement.executeUpdate(sql);
                 con.commit();
             } catch (SQLException e) {
                 throw new DatabaseException("Can't execute insert.");
+            }
+            try {
+                return statement.getGeneratedKeys();
+            } catch (Exception e) {
+                return null;
             }
         } else {
             throw  new DatabaseConnectionException("Not connected to database.");
@@ -201,9 +206,9 @@ public class DBConnection {
                     working = false;
                     return null;
                 case "INSERT":
-                    executeInsert(sql);
+                    ResultSet rs = executeInsert(sql);
                     working = false;
-                    return null;
+                    return rs;
                 case "UPDATE":
                     executeUpdate(sql);
                     working = false;

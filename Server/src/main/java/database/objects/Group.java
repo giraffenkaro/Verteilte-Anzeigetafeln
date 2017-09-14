@@ -20,7 +20,7 @@ public class Group {
      * @param members
      */
     public Group(int id, String name, User moderator, ArrayList<User> members){
-        setId(id);
+        setID(id);
         setName(name);
         setModerator(moderator);
         setMembers(members);
@@ -49,7 +49,7 @@ public class Group {
      * Get group id
      * @return id
      */
-    public int getId() {
+    public int getID() {
         return id;
     }
 
@@ -57,7 +57,7 @@ public class Group {
      * Set group id
      * @param id Positive or -1
      */
-    private void setId(int id) {
+    private void setID(int id) {
         this.id = id;
     }
 
