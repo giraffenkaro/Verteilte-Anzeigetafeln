@@ -114,4 +114,13 @@ public class Message {
         this.group = group;
     }
 
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", message='" + message + '\'' +
+                ", author=" + author +
+                ", group=" + group +
+                '}';
+    }
 }

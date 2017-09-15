@@ -114,6 +114,23 @@ public class Group {
      * @param member
      */
     public void addMember(User member) {
-        this.members.add(member);
+        try {
+            if (this.members == null) {
+                this.members = new ArrayList<User>();
+            }
+            this.members.add(member);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Group{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", moderator=" + moderator +
+                ", members=" + members +
+                '}';
     }
 }
