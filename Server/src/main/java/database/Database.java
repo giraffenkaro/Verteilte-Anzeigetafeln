@@ -64,7 +64,7 @@ public class Database {
             throw new DatabaseConnectionException("Not connected to database.");
         }
         try {
-            ResultSet rs = dbcon.execute("SELECT * FROM User WHERE id = " + id + ";");
+            ResultSet rs = dbcon.execute("SELECT * FROM 'User' WHERE id = '" + id + "';");
             if (rs.next()) {
                 User u = new User(rs.getInt("id"), rs.getString("name"), rs.getString("password"), rs.getInt("level"));
                 rs.close();
@@ -92,7 +92,7 @@ public class Database {
         }
         try {
             ArrayList<User> users = new ArrayList<User>();
-            ResultSet rs = dbcon.execute("SELECT * FROM User;");
+            ResultSet rs = dbcon.execute("SELECT * FROM 'User';");
             while (rs.next()) {
                 users.add(new User(rs.getInt("id"), rs.getString("name"), rs.getString("password"), rs.getInt("level")));
             }
@@ -121,7 +121,7 @@ public class Database {
         }
         try {
             ArrayList<User> users = new ArrayList<User>();
-            ResultSet rs = dbcon.execute("SELECT * FROM User WHERE level = " + level + ";");
+            ResultSet rs = dbcon.execute("SELECT * FROM 'User' WHERE level = '" + level + "';");
             while (rs.next()) {
                 users.add(new User(rs.getInt("id"), rs.getString("name"), rs.getString("password"), rs.getInt("level")));
             }
@@ -151,9 +151,9 @@ public class Database {
         if (user != null) {
             try {
                 if (user.getID() == -1) {
-                    dbcon.execute("INSERT INTO User (name, password, level) VALUES ('" + user.getName() + "','" + user.getPassword() + "','" + user.getLevel() + "');");
+                    dbcon.execute("INSERT INTO 'User' (name, password, level) VALUES ('" + user.getName() + "','" + user.getPassword() + "','" + user.getLevel() + "');");
                 } else {
-                    dbcon.execute("UPDATE User SET name = " + user.getName() + ", password = " + user.getPassword() + ", level = " + user.getLevel() + " WHERE id = " + user.getID() + ";");
+                    dbcon.execute("UPDATE 'User' SET name = '" + user.getName() + "', password = '" + user.getPassword() + "', level = '" + user.getLevel() + "' WHERE id = '" + user.getID() + "';");
                 }
             } catch (Exception e) {
                 throw new DatabaseObjectNotSavedException();
@@ -175,7 +175,7 @@ public class Database {
             throw new DatabaseConnectionException("Not connected to database.");
         }
         try {
-            ResultSet rs = dbcon.execute("SELECT * FROM Board WHERE id = " + id + ";");
+            ResultSet rs = dbcon.execute("SELECT * FROM 'Board' WHERE id = '" + id + "';");
             if (rs.next()) {
                 int gId = rs.getInt("groupId");
                 int uId = rs.getInt("userId");
@@ -213,7 +213,7 @@ public class Database {
             ArrayList<Board> boards = new ArrayList<Board>();
             ArrayList<Integer> gIds = new ArrayList<Integer>();
             ArrayList<Integer> uIds = new ArrayList<Integer>();
-            ResultSet rs = dbcon.execute("SELECT * FROM Board;");
+            ResultSet rs = dbcon.execute("SELECT * FROM 'Board';");
             while (rs.next()) {
                 boards.add(new Board(rs.getInt("id"), rs.getString("name"), null,null));
                 gIds.add(rs.getInt("groupId"));
@@ -261,9 +261,9 @@ public class Database {
                     gId = board.getGroup().getID();
                 }
                 if (board.getID() == -1) {
-                    dbcon.execute("INSERT INTO Board (name, groupId, userId) VALUES ('" + board.getName() + "','" + gId + "','" + uId + "');");
+                    dbcon.execute("INSERT INTO 'Board' (name, groupId, userId) VALUES ('" + board.getName() + "','" + gId + "','" + uId + "');");
                 } else {
-                    dbcon.execute("UPDATE Board SET name = " + board.getName() + ", userId = " + uId + ", groupId = " + gId + " WHERE id = " + board.getID() + ";");
+                    dbcon.execute("UPDATE 'Board' SET name = '" + board.getName() + "', userId = '" + uId + "', groupId = '" + gId + "' WHERE id = '" + board.getID() + "';");
                 }
             } catch (Exception e) {
                 throw new DatabaseObjectNotSavedException();
@@ -285,7 +285,7 @@ public class Database {
             throw new DatabaseConnectionException("Not connected to database.");
         }
         try {
-            ResultSet rs = dbcon.execute("SELECT * FROM Group WHERE id = " + id + ";");
+            ResultSet rs = dbcon.execute("SELECT * FROM 'Group' WHERE id = '" + id + "';");
             if (rs.next()) {
                 int mId = rs.getInt("modId");
                 Group g = new Group(rs.getInt("id"), rs.getString("name"), null, null);
@@ -319,7 +319,7 @@ public class Database {
         try {
             ArrayList<Group> groups = new ArrayList<Group>();
             ArrayList<Integer> mIds = new ArrayList<Integer>();
-            ResultSet rs = dbcon.execute("SELECT * FROM Group;");
+            ResultSet rs = dbcon.execute("SELECT * FROM 'Group';");
             while (rs.next()) {
                 groups.add(new Group(rs.getInt("id"), rs.getString("name"), null,null));
                 mIds.add(rs.getInt("modId"));;
@@ -357,7 +357,7 @@ public class Database {
             try {
                 int groupId = -1;
                 if (group.getID() == -1) {
-                    ResultSet rs = dbcon.execute("INSERT INTO Group (name, modId) VALUES ('" + group.getName() + "','" + group.getModerator().getID() + "');");
+                    ResultSet rs = dbcon.execute("INSERT INTO 'Group' (name, modId) VALUES ('" + group.getName() + "','" + group.getModerator().getID() + "');");
                     if (rs != null) {
                         try {
                             groupId = rs.getInt(1);
@@ -366,7 +366,7 @@ public class Database {
                         }
                     }
                 } else {
-                    dbcon.execute("UPDATE Group SET name = " + group.getName() + ", modId = " + group.getModerator().getID() + " WHERE id = " + group.getID() + ";");
+                    dbcon.execute("UPDATE 'Group' SET name = '" + group.getName() + "', modId = '" + group.getModerator().getID() + "' WHERE id = '" + group.getID() + "';");
                     groupId = group.getID();
                     deleteGroupMembers(group.getID());
                 }
@@ -374,6 +374,7 @@ public class Database {
                     saveGroupMembers(groupId, group.getMembers());
                 }
             } catch (Exception e) {
+                e.printStackTrace();
                 throw new DatabaseObjectNotSavedException();
             }
         } else {
@@ -394,7 +395,7 @@ public class Database {
         }
         try {
             ArrayList<Integer> uIds = new ArrayList<Integer>();
-            ResultSet rs = dbcon.execute("SELECT * FROM Group_User WHERE groupId = " + groupId + ";");
+            ResultSet rs = dbcon.execute("SELECT * FROM 'Group_User' WHERE groupId = '" + groupId + "';");
             while (rs.next()) {
                 uIds.add(rs.getInt("userId"));
             }
@@ -426,7 +427,7 @@ public class Database {
             throw new DatabaseConnectionException("Not connected to database.");
         }
         try {
-            dbcon.execute("DELETE * FROM Group_User WHERE groupId = " + groupId + ";");
+            dbcon.execute("DELETE FROM 'Group_User' WHERE groupId = '" + groupId + "';");
         } catch (Exception e) {
             dbcon.free();
         }
@@ -446,13 +447,11 @@ public class Database {
         if (groupMembers != null && groupMembers.size() > 0) {
             try {
                 for (User gM : groupMembers) {
-                    dbcon.execute("INSERT INTO Group_User (groupId, userId) VALUES ('" + groupId + "','" + gM.getID() + "');");
+                    dbcon.execute("INSERT INTO 'Group_User' (groupId, userId) VALUES ('" + groupId + "','" + gM.getID() + "');");
                 }
             } catch (Exception e) {
                 throw new DatabaseObjectNotSavedException();
             }
-        } else {
-            throw new IllegalArgumentException("GroupMembers null.");
         }
     }
 
@@ -468,7 +467,7 @@ public class Database {
             throw new DatabaseConnectionException("Not connected to database.");
         }
         try {
-            ResultSet rs = dbcon.execute("SELECT * FROM Message WHERE id = " + id + ";");
+            ResultSet rs = dbcon.execute("SELECT * FROM 'Message' WHERE id = '" + id + "';");
             if (rs.next()) {
                 int gId = rs.getInt("groupId");
                 int aId = rs.getInt("authorId");
@@ -506,7 +505,7 @@ public class Database {
             ArrayList<Message> messages = new ArrayList<Message>();
             ArrayList<Integer> gIds = new ArrayList<Integer>();
             ArrayList<Integer> aIds = new ArrayList<Integer>();
-            ResultSet rs = dbcon.execute("SELECT * FROM Message;");
+            ResultSet rs = dbcon.execute("SELECT * FROM 'Message';");
             while (rs.next()) {
                 messages.add(new Message(rs.getInt("id"), rs.getString("message"), null,null));
                 gIds.add(rs.getInt("groupId"));
@@ -554,9 +553,9 @@ public class Database {
                     gId = message.getGroup().getID();
                 }
                 if (message.getID() == -1) {
-                    dbcon.execute("INSERT INTO Message (message, groupId, authorId) VALUES ('" + message.getMessage() + "','" + gId + "','" + aId + "');");
+                    dbcon.execute("INSERT INTO 'Message' (message, groupId, authorId) VALUES ('" + message.getMessage() + "','" + gId + "','" + aId + "');");
                 } else {
-                    dbcon.execute("UPDATE Message SET message = " + message.getMessage() + ", authorId = " + aId + ", groupId = " + gId + " WHERE id = " + message.getID() + ";");
+                    dbcon.execute("UPDATE 'Message' SET message = '" + message.getMessage() + "', authorId = '" + aId + "', groupId = '" + gId + "' WHERE id = '" + message.getID() + "';");
                 }
             } catch (Exception e) {
                 throw new DatabaseObjectNotSavedException();
