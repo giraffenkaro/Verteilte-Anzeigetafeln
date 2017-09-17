@@ -151,9 +151,9 @@ public class Database {
         if (user != null) {
             try {
                 if (user.getID() == -1) {
-                    dbcon.execute("INSERT INTO 'User' (name, password, level) VALUES ('" + user.getName() + "','" + user.getPassword() + "','" + user.getLevel() + "');");
+                    dbcon.execute("INSERT INTO 'User' (name, password, level) VALUES ('" + escapeSQLString(user.getName()) + "','" + escapeSQLString(user.getPassword()) + "','" + user.getLevel() + "');");
                 } else {
-                    dbcon.execute("UPDATE 'User' SET name = '" + user.getName() + "', password = '" + user.getPassword() + "', level = '" + user.getLevel() + "' WHERE id = '" + user.getID() + "';");
+                    dbcon.execute("UPDATE 'User' SET name = '" + escapeSQLString(user.getName()) + "', password = '" + escapeSQLString(user.getPassword()) + "', level = '" + user.getLevel() + "' WHERE id = '" + user.getID() + "';");
                 }
             } catch (Exception e) {
                 throw new DatabaseObjectNotSavedException();
@@ -261,9 +261,9 @@ public class Database {
                     gId = board.getGroup().getID();
                 }
                 if (board.getID() == -1) {
-                    dbcon.execute("INSERT INTO 'Board' (name, groupId, userId) VALUES ('" + board.getName() + "','" + gId + "','" + uId + "');");
+                    dbcon.execute("INSERT INTO 'Board' (name, groupId, userId) VALUES ('" + escapeSQLString(board.getName()) + "','" + gId + "','" + uId + "');");
                 } else {
-                    dbcon.execute("UPDATE 'Board' SET name = '" + board.getName() + "', userId = '" + uId + "', groupId = '" + gId + "' WHERE id = '" + board.getID() + "';");
+                    dbcon.execute("UPDATE 'Board' SET name = '" + escapeSQLString(board.getName()) + "', userId = '" + uId + "', groupId = '" + gId + "' WHERE id = '" + board.getID() + "';");
                 }
             } catch (Exception e) {
                 throw new DatabaseObjectNotSavedException();
@@ -357,7 +357,7 @@ public class Database {
             try {
                 int groupId = -1;
                 if (group.getID() == -1) {
-                    ResultSet rs = dbcon.execute("INSERT INTO 'Group' (name, modId) VALUES ('" + group.getName() + "','" + group.getModerator().getID() + "');");
+                    ResultSet rs = dbcon.execute("INSERT INTO 'Group' (name, modId) VALUES ('" + escapeSQLString(group.getName()) + "','" + group.getModerator().getID() + "');");
                     if (rs != null) {
                         try {
                             groupId = rs.getInt(1);
@@ -366,7 +366,7 @@ public class Database {
                         }
                     }
                 } else {
-                    dbcon.execute("UPDATE 'Group' SET name = '" + group.getName() + "', modId = '" + group.getModerator().getID() + "' WHERE id = '" + group.getID() + "';");
+                    dbcon.execute("UPDATE 'Group' SET name = '" + escapeSQLString(group.getName()) + "', modId = '" + group.getModerator().getID() + "' WHERE id = '" + group.getID() + "';");
                     groupId = group.getID();
                     deleteGroupMembers(group.getID());
                 }
@@ -553,9 +553,9 @@ public class Database {
                     gId = message.getGroup().getID();
                 }
                 if (message.getID() == -1) {
-                    dbcon.execute("INSERT INTO 'Message' (message, groupId, authorId) VALUES ('" + message.getMessage() + "','" + gId + "','" + aId + "');");
+                    dbcon.execute("INSERT INTO 'Message' (message, groupId, authorId) VALUES ('" + escapeSQLString(message.getMessage()) + "','" + gId + "','" + aId + "');");
                 } else {
-                    dbcon.execute("UPDATE 'Message' SET message = '" + message.getMessage() + "', authorId = '" + aId + "', groupId = '" + gId + "' WHERE id = '" + message.getID() + "';");
+                    dbcon.execute("UPDATE 'Message' SET message = '" + escapeSQLString(message.getMessage()) + "', authorId = '" + aId + "', groupId = '" + gId + "' WHERE id = '" + message.getID() + "';");
                 }
             } catch (Exception e) {
                 throw new DatabaseObjectNotSavedException();
@@ -563,5 +563,15 @@ public class Database {
         } else {
             throw new IllegalArgumentException("Message null.");
         }
+    }
+
+    /**
+     * Escape special chars in string to avoid sql injection
+     * @param str
+     * @return escaped string
+     */
+    private String escapeSQLString(String str){
+        str = str.replace("'","''");
+        return str;
     }
 }
