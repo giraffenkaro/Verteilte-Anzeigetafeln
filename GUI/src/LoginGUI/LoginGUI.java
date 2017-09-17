@@ -1,4 +1,4 @@
-package Login;
+package LoginGUI;
 
 import Edit.EditGUI;
 
@@ -23,7 +23,7 @@ public class LoginGUI extends JFrame
     private JPasswordField txtUserPW;
     private JButton loginButton;
     private JButton cancelButton;
-    private JFrame frame = new JFrame("Login");
+    private JFrame frame = new JFrame("LoginGUI");
     private GridBagConstraints gbc;
 
     public LoginGUI()
@@ -96,7 +96,7 @@ public class LoginGUI extends JFrame
     {
         loginButton = new JButton();
         loginButton.setBackground(new Color(-9911320));
-        loginButton.setText("Login");
+        loginButton.setText("LoginGUI");
         gbc = new GridBagConstraints();
         gbc.gridx = 3;
         gbc.gridy = 2;

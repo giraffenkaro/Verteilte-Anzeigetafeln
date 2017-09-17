@@ -1,7 +1,6 @@
-package Login;
+package LoginGUI;
 
 import Edit.EditGUI;
-import sun.rmi.runtime.Log;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

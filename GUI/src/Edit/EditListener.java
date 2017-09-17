@@ -84,7 +84,7 @@ public class EditListener implements ActionListener
         }
         else
         {
-            listValue = (String)list1.getSelectedValue();
+            listValue = list1.getSelectedValue();
             defaultListModel1.remove(index);
             textArea1.setText(listValue);
             cancel = textArea1.getText();

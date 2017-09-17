@@ -1,6 +1,4 @@
-package Login;
-
-import javax.swing.*;
+package LoginGUI;
 
 /**
  * Created with IntelliJ IDEA
@@ -10,7 +8,6 @@ import javax.swing.*;
  */
 public class Main
 {
-
     public static void main(String[] args)
     {
         LoginGUI login = new LoginGUI();

@@ -45,7 +45,7 @@ public class EditGUI extends JFrame
     {
         editPanel = new JPanel();
         editPanel.setLayout(new GridBagLayout());
-        GridBagConstraints gbc;
+       // GridBagConstraints gbc;
     }
 
     public void addJLable ()
