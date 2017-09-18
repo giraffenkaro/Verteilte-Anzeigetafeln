@@ -125,5 +125,8 @@ public class Server implements Functions
     public String login(String username, String password)
     {
         //TODO loginfunktionalität basteln
+        
+        //vorläufig
+        return null;
     }
 }
