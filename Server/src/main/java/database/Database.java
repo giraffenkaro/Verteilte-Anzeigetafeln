@@ -81,6 +81,34 @@ public class Database {
     }
 
     /**
+     * Get a user from database by username
+     * @param username User Name
+     * @return User
+     * @throws DatabaseObjectNotFoundException
+     * @throws DatabaseConnectionException
+     */
+    public synchronized User getUserByName(String username) throws DatabaseObjectNotFoundException, DatabaseConnectionException {
+        if (!dbcon.isOpen()) {
+            throw new DatabaseConnectionException("Not connected to database.");
+        }
+        try {
+            ResultSet rs = dbcon.execute("SELECT * FROM 'User' WHERE Name = '" + username + "';");
+            if (rs.next()) {
+                User u = new User(rs.getInt("id"), rs.getString("name"), rs.getString("password"), rs.getInt("level"));
+                rs.close();
+                dbcon.free();
+                return u;
+            } else {
+                rs.close();
+                throw new DatabaseObjectNotFoundException();
+            }
+        } catch (Exception e) {
+            dbcon.free();
+            throw new DatabaseObjectNotFoundException();
+        }
+    }
+
+    /**
      * Get all users from database
      * @return Userlist
      * @throws DatabaseObjectNotFoundException
@@ -573,5 +601,23 @@ public class Database {
     private String escapeSQLString(String str){
         str = str.replace("'","''");
         return str;
+    }
+
+    /**
+     * Checks username and password and returns the user, if login was succesfull
+     * @param username
+     * @param password
+     * @return User or null
+     */
+    public User loginUser(String username, String password){
+        try {
+            User u = getUserByName(username);
+            if (u.checkPassword(password)){
+                return u;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
