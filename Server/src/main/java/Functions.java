@@ -19,6 +19,7 @@ public interface Functions extends Remote
 
     String addBoard(String name, int groupID) throws RemoteException;
     String deleteBoard(int boardID) throws RemoteException;
+    String login(String username, String password) throws RemoteException;
 
 
 
