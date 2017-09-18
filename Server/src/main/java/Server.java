@@ -120,4 +120,10 @@ public class Server implements Functions
     {
         return "deleteBoard ( " + boardID + ")";
     }
+    
+    @Override
+    public String login(String username, String password)
+    {
+        //TODO loginfunktionalität basteln
+    }
 }
