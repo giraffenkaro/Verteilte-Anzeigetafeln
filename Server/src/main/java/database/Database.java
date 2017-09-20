@@ -335,6 +335,44 @@ public class Database {
     }
 
     /**
+     * Get all groups for one user from database
+     * @return Grouplist
+     * @throws DatabaseObjectNotFoundException
+     * @throws DatabaseConnectionException
+     */
+    public synchronized ArrayList<Group> getGroupsByUser(User u) throws DatabaseObjectNotFoundException, DatabaseConnectionException {
+        if (!dbcon.isOpen()) {
+            throw new DatabaseConnectionException("Not connected to database.");
+        }
+        try {
+            ArrayList<Group> groups = new ArrayList<Group>();
+            ArrayList<Integer> gIDs = new ArrayList<Integer>();
+            ResultSet rs = dbcon.execute("SELECT id FROM 'Group' WHERE modId = '" + u.getID() + "';");
+            while (rs.next()) {
+                gIDs.add(rs.getInt("id"));
+            }
+            rs.close();
+            dbcon.free();
+            ResultSet rs2 = dbcon.execute("SELECT groupId FROM 'Group_User' WHERE userId = '" + u.getID() + "';");
+            while (rs2.next()) {
+                gIDs.add(rs.getInt("groupId"));
+            }
+            rs2.close();
+            dbcon.free();
+            for (Integer i : gIDs){
+                groups.add(getGroupById(i));
+            }
+            if (groups.size() > 0) {
+                return groups;
+            }
+            throw new DatabaseObjectNotFoundException();
+        } catch (Exception e) {
+            dbcon.free();
+            throw new DatabaseObjectNotFoundException();
+        }
+    }
+
+    /**
      * Get all groups from database
      * @return Grouplist
      * @throws DatabaseObjectNotFoundException
@@ -499,7 +537,7 @@ public class Database {
             if (rs.next()) {
                 int gId = rs.getInt("groupId");
                 int aId = rs.getInt("authorId");
-                Message m = new Message(rs.getInt("id"), rs.getString("message"), null, null);
+                Message m = new Message(rs.getInt("id"), rs.getString("message"), null, null, rs.getLong("timestamp"));
                 rs.close();
                 dbcon.free();
                 if (gId != -1) {
@@ -513,6 +551,72 @@ public class Database {
                 rs.close();
                 throw new DatabaseObjectNotFoundException();
             }
+        } catch (Exception e) {
+            dbcon.free();
+            throw new DatabaseObjectNotFoundException();
+        }
+    }
+
+    /**
+     * Get all messages for a user from database
+     * @param u User
+     * @return Boardlist
+     * @throws DatabaseObjectNotFoundException
+     * @throws DatabaseConnectionException
+     */
+    public synchronized ArrayList<Message> getMessagesByUser(User u) throws DatabaseObjectNotFoundException, DatabaseConnectionException {
+        if (!dbcon.isOpen()) {
+            throw new DatabaseConnectionException("Not connected to database.");
+        }
+        try {
+            ArrayList<Message> messages = new ArrayList<Message>();
+            ArrayList<Integer> mIds = new ArrayList<Integer>();
+            ResultSet rs = dbcon.execute("SELECT id FROM 'Message' WHERE authorId='" + u.getID() + "' ORDER BY timestamp DESC;");
+            while (rs.next()) {
+                mIds.add(rs.getInt("id"));
+            }
+            rs.close();
+            dbcon.free();
+            for (Integer i : mIds){
+                messages.add(getMessageById(i));
+            }
+            if (messages.size() > 0) {
+                return messages;
+            }
+            throw new DatabaseObjectNotFoundException();
+        } catch (Exception e) {
+            dbcon.free();
+            throw new DatabaseObjectNotFoundException();
+        }
+    }
+
+    /**
+     * Get all messages for a group from database
+     * @param g Group
+     * @return Boardlist
+     * @throws DatabaseObjectNotFoundException
+     * @throws DatabaseConnectionException
+     */
+    public synchronized ArrayList<Message> getMessagesByGroup(Group g) throws DatabaseObjectNotFoundException, DatabaseConnectionException {
+        if (!dbcon.isOpen()) {
+            throw new DatabaseConnectionException("Not connected to database.");
+        }
+        try {
+            ArrayList<Message> messages = new ArrayList<Message>();
+            ArrayList<Integer> mIds = new ArrayList<Integer>();
+            ResultSet rs = dbcon.execute("SELECT id FROM 'Message' WHERE groupId='" + g.getID() + "' ORDER BY timestamp DESC;");
+            while (rs.next()) {
+                mIds.add(rs.getInt("id"));
+            }
+            rs.close();
+            dbcon.free();
+            for (Integer i : mIds){
+                messages.add(getMessageById(i));
+            }
+            if (messages.size() > 0) {
+                return messages;
+            }
+            throw new DatabaseObjectNotFoundException();
         } catch (Exception e) {
             dbcon.free();
             throw new DatabaseObjectNotFoundException();
@@ -535,7 +639,7 @@ public class Database {
             ArrayList<Integer> aIds = new ArrayList<Integer>();
             ResultSet rs = dbcon.execute("SELECT * FROM 'Message';");
             while (rs.next()) {
-                messages.add(new Message(rs.getInt("id"), rs.getString("message"), null,null));
+                messages.add(new Message(rs.getInt("id"), rs.getString("message"), null,null, rs.getLong("timestamp")));
                 gIds.add(rs.getInt("groupId"));
                 aIds.add(rs.getInt("authorId"));
             }
@@ -581,9 +685,9 @@ public class Database {
                     gId = message.getGroup().getID();
                 }
                 if (message.getID() == -1) {
-                    dbcon.execute("INSERT INTO 'Message' (message, groupId, authorId) VALUES ('" + escapeSQLString(message.getMessage()) + "','" + gId + "','" + aId + "');");
+                    dbcon.execute("INSERT INTO 'Message' (message, groupId, authorId, timestamp) VALUES ('" + escapeSQLString(message.getMessage()) + "','" + gId + "','" + aId + "','" + message.getTimestamp() + "');");
                 } else {
-                    dbcon.execute("UPDATE 'Message' SET message = '" + escapeSQLString(message.getMessage()) + "', authorId = '" + aId + "', groupId = '" + gId + "' WHERE id = '" + message.getID() + "';");
+                    dbcon.execute("UPDATE 'Message' SET message = '" + escapeSQLString(message.getMessage()) + "', authorId = '" + aId + "', groupId = '" + gId + "', timestamp = '" + message.getTimestamp() + "' WHERE id = '" + message.getID() + "';");
                 }
             } catch (Exception e) {
                 throw new DatabaseObjectNotSavedException();
