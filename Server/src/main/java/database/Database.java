@@ -335,6 +335,44 @@ public class Database {
     }
 
     /**
+     * Get all groups for one user from database
+     * @return Grouplist
+     * @throws DatabaseObjectNotFoundException
+     * @throws DatabaseConnectionException
+     */
+    public synchronized ArrayList<Group> getGroupsByUser(User u) throws DatabaseObjectNotFoundException, DatabaseConnectionException {
+        if (!dbcon.isOpen()) {
+            throw new DatabaseConnectionException("Not connected to database.");
+        }
+        try {
+            ArrayList<Group> groups = new ArrayList<Group>();
+            ArrayList<Integer> gIDs = new ArrayList<Integer>();
+            ResultSet rs = dbcon.execute("SELECT id FROM 'Group' WHERE modId = '" + u.getID() + "';");
+            while (rs.next()) {
+                gIDs.add(rs.getInt("id"));
+            }
+            rs.close();
+            dbcon.free();
+            ResultSet rs2 = dbcon.execute("SELECT groupId FROM 'Group_User' WHERE userId = '" + u.getID() + "';");
+            while (rs2.next()) {
+                gIDs.add(rs.getInt("groupId"));
+            }
+            rs2.close();
+            dbcon.free();
+            for (Integer i : gIDs){
+                groups.add(getGroupById(i));
+            }
+            if (groups.size() > 0) {
+                return groups;
+            }
+            throw new DatabaseObjectNotFoundException();
+        } catch (Exception e) {
+            dbcon.free();
+            throw new DatabaseObjectNotFoundException();
+        }
+    }
+
+    /**
      * Get all groups from database
      * @return Grouplist
      * @throws DatabaseObjectNotFoundException
