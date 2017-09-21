@@ -484,6 +484,47 @@ public class Database {
     }
 
     /**
+     * Get all not group members
+     * @param group Group
+     * @return not group members (null, if found nothing)
+     */
+    public ArrayList<User> getUsersNotInGroup(Group group){
+        return getUsersNotInGroup(group.getID());
+    }
+
+    /**
+     * Get all not group members
+     * @param groupId Group id
+     * @return not group members (null, if found nothing)
+     */
+    public ArrayList<User> getUsersNotInGroup(int groupId){
+        try {
+            ArrayList<User> members = getGroupMembers(groupId);
+            ArrayList<User> users = getUsers();
+            ArrayList<User> notInGroup = new ArrayList<User>();
+            for (User u : users){
+                boolean found = false;
+                for (User m : members){
+                    if (u.getName().equalsIgnoreCase(m.getName())){
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    notInGroup.add(u);
+                }
+            }
+            if (notInGroup.size() > 0){
+                return notInGroup;
+            }
+            return null;
+        } catch (Exception e) {
+            dbcon.free();
+            return null;
+        }
+    }
+
+    /**
      * Delete all group members
      * @param groupId
      * @throws DatabaseConnectionException
