@@ -4,13 +4,13 @@ apply plugin: 'java'
 
 sourceCompatibility = 1.8
 
-task DepJar(type: Jar) {
+task JarAll(type: Jar) {
     manifest {
         attributes 'Implementation-Title': 'DepJar',
                 'Implementation-Version': '1.0',
                 'Main-Class': 'Server'
     }
-    baseName = project.name + '-all'
+    baseName = project.name
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
