@@ -4,7 +4,6 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import database.Database;
 import database.exceptions.DatabaseConnectionException;
-import threads.ServerThread;
 
 
 public class Server implements Functions
@@ -14,26 +13,10 @@ public class Server implements Functions
 
     public static void main(String args[])
     {
-
-        Database database = null;
-        try {
-            database = new Database();
-            try {
-                ServerThread server = new ServerThread(database);
-                server.run();
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                database.closeDB();
-            }
-
-        } catch (DatabaseConnectionException e) {
-            e.printStackTrace();
-        }
-
-
         try
         {
+            Database database = new Database();
+
             Server obj = new Server();
             Functions stub = (Functions) UnicastRemoteObject.exportObject(obj, 0);
 
