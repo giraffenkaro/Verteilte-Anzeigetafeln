@@ -110,9 +110,15 @@ public class Client {
     public User loginUser(String username, String password) throws Exception {
         return this.rmi.loginUser(username, password);
     }
+    public String test(int testID) throws Exception{
+        return this.rmi.test(42);
+    }
 
     public Client(String host) {
         try {
+            if(System.getSecurityManager() == null) {
+                System.setSecurityManager(new RMISecurityManager());
+            }
             this.registry = LocateRegistry.getRegistry(host);
             this.rmi = (Functions) registry.lookup("Functions");
         } catch (Exception e) {

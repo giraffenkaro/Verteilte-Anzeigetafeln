@@ -38,6 +38,11 @@ public class Server implements Functions
         return this.db.getUsers();
     }
     @Override
+    public String test(int testID) throws Exception
+    {
+        return "Hallo Welt!";
+    }
+    @Override
     public ArrayList<User> getUsersByLevel(int level) throws Exception {
         return this.db.getUsersByLevel(level);
     }

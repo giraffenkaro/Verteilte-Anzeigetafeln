@@ -7,7 +7,8 @@ package classes;
 
 import exceptions.EmptyStringException;
 import exceptions.IllegalCharacterException;
-import rmiconnection.*;
+import rmiconnections.Client;
+
 /**
  *
  * @author Laura

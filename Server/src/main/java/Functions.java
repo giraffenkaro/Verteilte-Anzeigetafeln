@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public interface Functions extends Remote
 {
-
+    String test(int testID) throws Exception;
     User getUserById(int id) throws Exception;
     User getUserByName(String username) throws Exception;
     ArrayList<User> getUsers() throws Exception;

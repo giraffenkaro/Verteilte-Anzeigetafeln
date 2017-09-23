@@ -48,6 +48,8 @@ public class loginFXMLController implements Initializable {
             Control.isLegit(pfPassword.getText());
             Stage stage = (Stage) bLogin.getScene().getWindow();
             stage.close();
+            System.out.println(GUIVS.instance.control.getC().test(14));
+           /*
             GUIVS.userAnsicht();
             
             
@@ -78,7 +80,7 @@ public class loginFXMLController implements Initializable {
             {
                 throw new IllegalPermissionLevelException();
             }
-
+    */
         }
         catch(IllegalCharacterException icex)
         {
@@ -100,6 +102,7 @@ public class loginFXMLController implements Initializable {
         {
             pm = null;
         }
+
     }
    
     @Override

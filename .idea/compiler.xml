@@ -7,6 +7,8 @@
       <module name="Server_main" target="1.8" />
       <module name="Server_test" target="1.8" />
       <module name="Verteilte-Anzeigetafeln_main" target="1.8" />
+      <module name="Verteilte-Anzeigetafeln_suicide_main" target="1.8" />
+      <module name="Verteilte-Anzeigetafeln_suicide_test" target="1.8" />
       <module name="Verteilte-Anzeigetafeln_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
