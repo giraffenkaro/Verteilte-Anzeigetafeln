@@ -335,6 +335,39 @@ public class Database {
     }
 
     /**
+     * Get a group from database by name
+     * @param name Groupname
+     * @return Group
+     * @throws DatabaseObjectNotFoundException
+     * @throws DatabaseConnectionException
+     */
+    public synchronized Group getGroupByName(String name) throws DatabaseObjectNotFoundException, DatabaseConnectionException {
+        if (!dbcon.isOpen()) {
+            throw new DatabaseConnectionException("Not connected to database.");
+        }
+        try {
+            ResultSet rs = dbcon.execute("SELECT * FROM 'Group' WHERE name = '" + name + "';");
+            if (rs.next()) {
+                int mId = rs.getInt("modId");
+                Group g = new Group(rs.getInt("id"), rs.getString("name"), null, null);
+                rs.close();
+                dbcon.free();
+                if (mId != -1) {
+                    g.setModerator(getUserById(mId));
+                }
+                g.setMembers(getGroupMembers(g.getID()));
+                return g;
+            } else {
+                rs.close();
+                throw new DatabaseObjectNotFoundException();
+            }
+        } catch (Exception e) {
+            dbcon.free();
+            throw new DatabaseObjectNotFoundException();
+        }
+    }
+
+    /**
      * Get all groups for one user from database
      * @return Grouplist
      * @throws DatabaseObjectNotFoundException

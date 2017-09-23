@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="795.1666666666666" y="1515.5">exceptions.IllegalCharacterException</node>
+    <node x="1061.0" y="3349.0">exceptions.DatabaseObjectNotFoundException</node>
+    <node x="1196.6666666666665" y="1938.0">classes.Control</node>
+    <node x="1708.9166666666665" y="2086.0">classes.GUIVS</node>
+    <node x="1254.456796607532" y="575.0">rmiconnections.Functions</node>
+    <node x="2115.123463274199" y="1261.0">Server</node>
+    <node x="266.5" y="762.5">database.ObjectFactory</node>
+    <node x="3313.9274237472773" y="0.0">formulare.BearbeitenFXMLController</node>
+    <node x="552.3317966075319" y="2208.5">classes.Control.permission</node>
+    <node x="1143.875" y="224.0">database.objects</node>
+    <node x="10.5" y="1504.0">anzeigetafel.AnzeigetafelFXMLController</node>
+    <node x="1123.1666666666665" y="1261.0">rmiconnections.Client</node>
+    <node x="2396.862706193588" y="0.0">database.exceptions</node>
+    <node x="387.0" y="3349.0">exceptions.NoItemSelectedException</node>
+    <node x="34.5" y="784.0">anzeigetafel.Nachrichtenbox</node>
+    <node x="3008.9274237472773" y="0.0">formulare.NeueNachrichtFXMLController</node>
+    <node x="1688.0" y="3349.0">formulare.GruppeVerwaltenFXMLController</node>
+    <node x="411.83179660753194" y="2778.0">formulare.UserAnlegenFXMLController</node>
+    <node x="2135.1785714285716" y="2525.0">guivs.AdminAnsichtFXMLController</node>
+    <node x="0.0" y="3349.0">exceptions.IllegalPermissionLevelException</node>
+    <node x="1376.0" y="3349.0">exceptions.DatabaseObjectNotSavedException</node>
+    <node x="1892.1666666666665" y="575.0">Functions</node>
+    <node x="742.0" y="3349.0">exceptions.DatabaseConnectionException</node>
+    <node x="1855.1785714285716" y="2679.0">guivs.UserAnsichtFXMLController</node>
+    <node x="1993.0" y="3349.0">exceptions.DatabaseException</node>
+    <node x="1555.8607220666047" y="2844.0">guivs.loginFXMLController</node>
+    <node x="2703.9274237472773" y="0.0">formulare.UserVerwaltenFXMLController</node>
+    <node x="1992.628812636165" y="2197.5">classes.PopUpMessage</node>
+    <node x="2250.166666666667" y="508.0">database.Database</node>
+    <node x="953.3696506380332" y="828.5">rmiconnections.RMISecurityManager</node>
+    <node x="932.0817966075319" y="2186.5">exceptions.NoUserFoundException</node>
+    <node x="2409.4274237472773" y="80.0">database.DBConnection</node>
+    <node x="515.1666666666666" y="1482.0">formulare.NeueGruppeFXMLController</node>
+    <node x="1480.1666666666665" y="1515.5">exceptions.EmptyStringException</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="guivs.AdminAnsichtFXMLController" target="classes.GUIVS">
+      <point x="-88.0" y="-389.5" />
+      <point x="2179.1785714285716" y="2465.0" />
+      <point x="1904.0416666666665" y="2465.0" />
+      <point x="83.625" y="159.5" />
+    </edge>
+    <edge source="Functions" target="database.objects">
+      <point x="0.0" y="-279.5" />
+      <point x="2060.6666666666665" y="448.0" />
+      <point x="1239.7361111111109" y="448.0" />
+      <point x="36.361111111111086" y="15.0" />
+    </edge>
+    <edge source="guivs.loginFXMLController" target="classes.GUIVS">
+      <point x="37.14285714285711" y="-70.5" />
+      <point x="1723.0035792094618" y="2465.0" />
+      <point x="1792.5416666666665" y="2465.0" />
+      <point x="-27.875" y="159.5" />
+    </edge>
+    <edge source="guivs.loginFXMLController" target="classes.Control">
+      <point x="-37.14285714285711" y="-70.5" />
+      <point x="1648.7178649237476" y="2425.0" />
+      <point x="1291.6666666666665" y="2425.0" />
+      <point x="0.0" y="49.0" />
+    </edge>
+    <edge source="guivs.loginFXMLController" target="exceptions.IllegalCharacterException">
+      <point x="-111.42857142857144" y="-70.5" />
+      <point x="1574.4321506380334" y="2445.0" />
+      <point x="872.1666666666666" y="2445.0" />
+      <point x="-77.0" y="59.0" />
+    </edge>
+    <edge source="formulare.NeueGruppeFXMLController" target="database.objects">
+      <point x="86.66666666666674" y="-92.5" />
+      <point x="731.8333333333334" y="1241.0" />
+      <point x="696.8788126361653" y="1241.0" />
+      <point x="696.8788126361653" y="488.0" />
+      <point x="1206.6805555555552" y="488.0" />
+      <point x="3.3055555555554292" y="15.0" />
+    </edge>
+    <edge source="database.objects" target="database.objects">
+      <point x="-56.19444444444446" y="15.0" />
+      <point x="1147.1805555555554" y="274.0" />
+      <point x="1123.875" y="274.0" />
+      <point x="1123.875" y="249.0" />
+      <point x="-59.5" y="10.0" />
+    </edge>
+    <edge source="database.Database" target="database.objects">
+      <point x="-84.25" y="-346.5" />
+      <point x="2334.416666666667" y="418.0" />
+      <point x="1259.5694444444443" y="418.0" />
+      <point x="56.19444444444434" y="15.0" />
+    </edge>
+    <edge source="rmiconnections.Functions" target="database.objects">
+      <point x="0.0" y="-279.5" />
+      <point x="1422.956796607532" y="478.0" />
+      <point x="1219.9027777777778" y="478.0" />
+      <point x="16.52777777777783" y="15.0" />
+    </edge>
+    <edge source="rmiconnections.Client" target="rmiconnections.RMISecurityManager">
+      <point x="-126.375" y="-313.5" />
+      <point x="1165.2916666666665" y="1241.0" />
+      <point x="1049.3696506380334" y="1241.0" />
+      <point x="0.0" y="26.0" />
+    </edge>
+    <edge source="formulare.UserAnlegenFXMLController" target="database.objects">
+      <point x="-104.0" y="-136.5" />
+      <point x="437.83179660753194" y="2505.0" />
+      <point x="0.0" y="2505.0" />
+      <point x="0.0" y="428.0" />
+      <point x="1167.0138888888887" y="428.0" />
+      <point x="-36.361111111111086" y="15.0" />
+    </edge>
+    <edge source="formulare.NeueGruppeFXMLController" target="database.ObjectFactory">
+      <point x="-86.66666666666674" y="-92.5" />
+      <point x="558.4999999999999" y="1241.0" />
+      <point x="571.0" y="1241.0" />
+      <point x="101.5" y="92.0" />
+    </edge>
+    <edge source="rmiconnections.Client" target="rmiconnections.Functions">
+      <point x="42.125" y="-313.5" />
+      <point x="1333.7916666666665" y="1241.0" />
+      <point x="1338.706796607532" y="1241.0" />
+      <point x="-84.25" y="279.5" />
+    </edge>
+    <edge source="formulare.UserAnlegenFXMLController" target="classes.Control">
+      <point x="0.0" y="-136.5" />
+      <point x="541.8317966075319" y="2056.0" />
+      <point x="1215.6666666666665" y="2056.0" />
+      <point x="-76.0" y="49.0" />
+    </edge>
+    <edge source="guivs.UserAnsichtFXMLController" target="classes.GUIVS">
+      <point x="-86.66666666666674" y="-235.5" />
+      <point x="1898.5119047619046" y="2465.0" />
+      <point x="1848.2916666666665" y="2465.0" />
+      <point x="27.875" y="159.5" />
+    </edge>
+    <edge source="classes.GUIVS" target="database.objects">
+      <point x="27.875" y="-159.5" />
+      <point x="1848.2916666666665" y="2066.0" />
+      <point x="1870.6666666666665" y="2066.0" />
+      <point x="1870.6666666666665" y="468.0" />
+      <point x="1226.5138888888887" y="468.0" />
+      <point x="23.138888888888914" y="15.0" />
+    </edge>
+    <edge source="database.Database" target="database.DBConnection">
+      <point x="140.41666666666663" y="-346.5" />
+      <point x="2559.083333333333" y="488.0" />
+      <point x="2584.1774237472773" y="488.0" />
+      <point x="58.25" y="159.0" />
+    </edge>
+    <edge source="formulare.UserAnlegenFXMLController" target="classes.Control.permission">
+      <point x="52.0" y="-136.5" />
+      <point x="593.8317966075319" y="2505.0" />
+      <point x="606.3317966075319" y="2505.0" />
+      <point x="0.0" y="37.0" />
+    </edge>
+    <edge source="formulare.UserAnlegenFXMLController" target="classes.GUIVS">
+      <point x="104.0" y="-136.5" />
+      <point x="645.8317966075319" y="2455.0" />
+      <point x="1736.7916666666665" y="2455.0" />
+      <point x="-83.625" y="159.5" />
+    </edge>
+    <edge source="anzeigetafel.AnzeigetafelFXMLController" target="anzeigetafel.Nachrichtenbox">
+      <point x="-65.0" y="-70.5" />
+      <point x="75.5" y="1241.0" />
+      <point x="87.5" y="1241.0" />
+      <point x="-53.0" y="70.5" />
+    </edge>
+    <edge source="Server" target="database.exceptions">
+      <point x="144.42857142857156" y="-313.5" />
+      <point x="2428.0520347027705" y="1241.0" />
+      <point x="2652.9274237472773" y="1241.0" />
+      <point x="2652.9274237472773" y="50.0" />
+      <point x="2516.737706193588" y="50.0" />
+      <point x="51.375" y="15.0" />
+    </edge>
+    <edge source="database.ObjectFactory" target="database.objects">
+      <point x="101.5" y="-92.0" />
+      <point x="571.0" y="468.0" />
+      <point x="1193.458333333333" y="468.0" />
+      <point x="-9.916666666666742" y="15.0" />
+    </edge>
+    <edge source="classes.Control" target="exceptions.EmptyStringException">
+      <point x="76.0" y="-49.0" />
+      <point x="1367.6666666666665" y="1918.0" />
+      <point x="1552.9166666666665" y="1918.0" />
+      <point x="-72.75" y="59.0" />
+    </edge>
+    <edge source="Server" target="database.Database">
+      <point x="96.28571428571433" y="-313.5" />
+      <point x="2379.9091775599127" y="1231.0" />
+      <point x="2531.0" y="1231.0" />
+      <point x="112.33333333333326" y="346.5" />
+    </edge>
+    <edge source="classes.Control.permission" target="classes.Control">
+      <point x="0.0" y="-37.0" />
+      <point x="606.3317966075319" y="2066.0" />
+      <point x="1253.6666666666665" y="2066.0" />
+      <point x="-38.0" y="49.0" />
+    </edge>
+    <edge source="formulare.UserAnlegenFXMLController" target="database.ObjectFactory">
+      <point x="-52.0" y="-136.5" />
+      <point x="489.83179660753194" y="2495.0" />
+      <point x="368.0" y="2495.0" />
+      <point x="-101.5" y="92.0" />
+    </edge>
+    <edge source="classes.GUIVS" target="classes.Control">
+      <point x="-83.625" y="-159.5" />
+      <point x="1736.7916666666665" y="2066.0" />
+      <point x="1329.6666666666665" y="2066.0" />
+      <point x="38.0" y="49.0" />
+    </edge>
+    <edge source="classes.Control" target="exceptions.IllegalCharacterException">
+      <point x="-76.0" y="-49.0" />
+      <point x="1215.6666666666665" y="1918.0" />
+      <point x="1026.1666666666665" y="1918.0" />
+      <point x="77.0" y="59.0" />
+    </edge>
+    <edge source="guivs.UserAnsichtFXMLController" target="classes.PopUpMessage">
+      <point x="86.66666666666652" y="-235.5" />
+      <point x="2071.845238095238" y="2505.0" />
+      <point x="2146.628812636165" y="2505.0" />
+      <point x="22.0" y="48.0" />
+    </edge>
+    <edge source="Server" target="database.objects">
+      <point x="-48.14285714285711" y="-313.5" />
+      <point x="2235.4806061313416" y="1241.0" />
+      <point x="2239.6666666666665" y="1241.0" />
+      <point x="2239.6666666666665" y="438.0" />
+      <point x="1246.3472222222222" y="438.0" />
+      <point x="42.97222222222217" y="15.0" />
+    </edge>
+    <edge source="database.DBConnection" target="database.exceptions">
+      <point x="0.0" y="-159.0" />
+      <point x="2525.9274237472773" y="60.0" />
+      <point x="2482.487706193588" y="60.0" />
+      <point x="17.125" y="15.0" />
+    </edge>
+    <edge source="Server" target="Functions">
+      <point x="-144.42857142857144" y="-313.5" />
+      <point x="2139.1948918456274" y="1241.0" />
+      <point x="1976.4166666666665" y="1241.0" />
+      <point x="-84.25" y="279.5" />
+    </edge>
+    <edge source="anzeigetafel.Nachrichtenbox" target="database.objects">
+      <point x="53.0" y="-70.5" />
+      <point x="193.5" y="448.0" />
+      <point x="1180.2361111111109" y="448.0" />
+      <point x="-23.138888888888914" y="15.0" />
+    </edge>
+    <edge source="guivs.loginFXMLController" target="exceptions.EmptyStringException">
+      <point x="0.0" y="-70.5" />
+      <point x="1685.8607220666047" y="2445.0" />
+      <point x="1698.4166666666665" y="2445.0" />
+      <point x="72.75" y="59.0" />
+    </edge>
+    <edge source="classes.Control" target="rmiconnections.Client">
+      <point x="0.0" y="-49.0" />
+      <point x="0.0" y="313.5" />
+    </edge>
+    <edge source="rmiconnections.Client" target="database.objects">
+      <point x="-42.125" y="-313.5" />
+      <point x="1249.5416666666665" y="1241.0" />
+      <point x="1243.956796607532" y="1241.0" />
+      <point x="1243.956796607532" y="488.0" />
+      <point x="1213.2916666666665" y="488.0" />
+      <point x="9.916666666666742" y="15.0" />
+    </edge>
+    <edge source="guivs.loginFXMLController" target="classes.PopUpMessage">
+      <point x="74.28571428571433" y="-70.5" />
+      <point x="1760.1464363523191" y="2475.0" />
+      <point x="2014.628812636165" y="2475.0" />
+      <point x="-110.0" y="48.0" />
+    </edge>
+    <edge source="guivs.AdminAnsichtFXMLController" target="classes.PopUpMessage">
+      <point x="88.0" y="-389.5" />
+      <point x="2355.1785714285716" y="2495.0" />
+      <point x="2234.628812636165" y="2495.0" />
+      <point x="110.0" y="48.0" />
+    </edge>
+    <edge source="guivs.loginFXMLController" target="exceptions.NoUserFoundException">
+      <point x="-74.28571428571428" y="-70.5" />
+      <point x="1611.5750077808905" y="2435.0" />
+      <point x="1081.581796607532" y="2435.0" />
+      <point x="0.0" y="59.0" />
+    </edge>
+    <edge source="database.Database" target="database.exceptions">
+      <point x="28.083333333333485" y="-346.5" />
+      <point x="2446.75" y="488.0" />
+      <point x="2398.9274237472773" y="488.0" />
+      <point x="2398.9274237472773" y="60.0" />
+      <point x="2448.237706193588" y="60.0" />
+      <point x="-17.125" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.10000000000000005" x="982.8690476190495" y="207.75" />
+  <SelectedNodes>
+    <node>exceptions.IllegalCharacterException</node>
+    <node>exceptions.DatabaseObjectNotFoundException</node>
+    <node>classes.Control</node>
+    <node>classes.GUIVS</node>
+    <node>rmiconnections.Functions</node>
+    <node>Server</node>
+    <node>database.ObjectFactory</node>
+    <node>formulare.BearbeitenFXMLController</node>
+    <node>classes.Control.permission</node>
+    <node>database.objects</node>
+    <node>anzeigetafel.AnzeigetafelFXMLController</node>
+    <node>rmiconnections.Client</node>
+    <node>database.exceptions</node>
+    <node>exceptions.NoItemSelectedException</node>
+    <node>anzeigetafel.Nachrichtenbox</node>
+    <node>formulare.NeueNachrichtFXMLController</node>
+    <node>formulare.GruppeVerwaltenFXMLController</node>
+    <node>formulare.UserAnlegenFXMLController</node>
+    <node>guivs.AdminAnsichtFXMLController</node>
+    <node>exceptions.IllegalPermissionLevelException</node>
+    <node>exceptions.DatabaseObjectNotSavedException</node>
+    <node>Functions</node>
+    <node>exceptions.DatabaseConnectionException</node>
+    <node>guivs.UserAnsichtFXMLController</node>
+    <node>exceptions.DatabaseException</node>
+    <node>guivs.loginFXMLController</node>
+    <node>formulare.UserVerwaltenFXMLController</node>
+    <node>classes.PopUpMessage</node>
+    <node>database.Database</node>
+    <node>rmiconnections.RMISecurityManager</node>
+    <node>exceptions.NoUserFoundException</node>
+    <node>database.DBConnection</node>
+    <node>formulare.NeueGruppeFXMLController</node>
+    <node>exceptions.EmptyStringException</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Constructors</Category>
+    <Category>Properties</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

@@ -10,9 +10,12 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Server/Server.iml" filepath="$PROJECT_DIR$/.idea/modules/Server/Server.iml" group="Server" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Server/Server_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Server/Server_main.iml" group="Server" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Server/Server_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Server/Server_test.iml" group="Server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Verteilte-Anzeigetafeln.iml" filepath="$PROJECT_DIR$/.idea/modules/Verteilte-Anzeigetafeln.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Verteilte-Anzeigetafeln_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Verteilte-Anzeigetafeln_main.iml" group="Verteilte-Anzeigetafeln" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Verteilte-Anzeigetafeln_suicide.iml" filepath="$PROJECT_DIR$/.idea/modules/Verteilte-Anzeigetafeln_suicide.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Verteilte-Anzeigetafeln_suicide_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Verteilte-Anzeigetafeln_suicide_main.iml" group="Verteilte-Anzeigetafeln_suicide" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Verteilte-Anzeigetafeln_suicide_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Verteilte-Anzeigetafeln_suicide_test.iml" group="Verteilte-Anzeigetafeln_suicide" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Verteilte-Anzeigetafeln_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Verteilte-Anzeigetafeln_test.iml" group="Verteilte-Anzeigetafeln" />
     </modules>
   </component>
 </project>
