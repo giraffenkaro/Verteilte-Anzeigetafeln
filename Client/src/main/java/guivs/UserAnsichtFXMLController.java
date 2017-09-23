@@ -7,6 +7,7 @@ package guivs;
 
 import classes.GUIVS;
 import classes.PopUpMessage;
+import database.objects.Message;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
@@ -41,7 +43,7 @@ public class UserAnsichtFXMLController implements Initializable
     private Button bAnzeigetafel;
     
     @FXML
-    private TableView tTabelle;
+    private TableView<Message> tTabelle;
     
     @FXML
     private TableColumn tcNachrichten;
@@ -84,7 +86,7 @@ public class UserAnsichtFXMLController implements Initializable
     {
         try
         {
-            GUIVS.bearbeiteNachricht();
+            GUIVS.bearbeiteNachricht((Message) tTabelle.getSelectionModel().getSelectedItem());
         }
         catch(Exception e){} 
     }
@@ -110,6 +112,22 @@ public class UserAnsichtFXMLController implements Initializable
     {
         // TODO
         pm = new PopUpMessage();
+        //Row-Listener
+        tTabelle.setRowFactory( tv -> {
+        TableRow<Message> row = new TableRow<>();
+        row.setOnMouseClicked(event -> {
+        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+            Message rowData = row.getItem();
+            try{
+                GUIVS.bearbeiteNachricht(rowData);
+            }catch(Exception e)
+            {
+                pm.showError("Exception", e.toString());
+            }
+        }
+        });
+        return row ;
+});
     }    
     
 }

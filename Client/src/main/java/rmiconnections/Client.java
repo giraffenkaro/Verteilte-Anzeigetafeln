@@ -4,8 +4,13 @@ package rmiconnections;
  * Merlin, 16.08.2017
  */
 
+import database.objects.Board;
+import database.objects.Group;
+import database.objects.Message;
+import database.objects.User;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 import rmiinterface.*;
 
 public class Client {
@@ -13,7 +18,7 @@ public class Client {
     private Registry registry;
     private Functions rmi;
 
-    /*
+    
     public User getUserById(int id) throws Exception {
         return this.rmi.getUserById(id);
     }
@@ -105,11 +110,17 @@ public class Client {
 
     public User loginUser(String username, String password) throws Exception {
         return this.rmi.loginUser(username, password);
-    }*/
+    }
     public String test(int testID) throws Exception{
         return this.rmi.test(42);
     }
 
+    public Group getGroupByName(String name) throws Exception
+    {
+        return this.rmi.getGroupByName(name);
+    }
+    
+    
     public Client(String host) {
         try {
             /*

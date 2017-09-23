@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public interface Functions extends Remote
 {
     String test(int testID) throws Exception;
-    /*
     User getUserById(int id) throws Exception;
     User getUserByName(String username) throws Exception;
     ArrayList<User> getUsers() throws Exception;
@@ -32,5 +31,5 @@ public interface Functions extends Remote
     ArrayList<Message> getMessagesByGroup(Group g) throws Exception;
     void saveMessage(Message message) throws Exception;
     User loginUser(String username, String password) throws Exception;
-    */
+    Group getGroupByName(String name) throws Exception;
 }

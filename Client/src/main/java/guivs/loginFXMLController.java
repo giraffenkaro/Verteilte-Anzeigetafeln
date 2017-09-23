@@ -8,6 +8,7 @@ package guivs;
 import classes.GUIVS;
 import classes.PopUpMessage;
 import classes.Control;
+import database.objects.Group;
 import exceptions.EmptyStringException;
 import exceptions.IllegalPermissionLevelException;
 import exceptions.IllegalCharacterException;
@@ -48,16 +49,15 @@ public class loginFXMLController implements Initializable {
             Control.isLegit(pfPassword.getText());
             Stage stage = (Stage) bLogin.getScene().getWindow();
             stage.close();
-            System.out.println(GUIVS.instance.control.getC().test(14));
-           /*
-            GUIVS.userAnsicht();
             
-            
-            
+           
+            System.out.println(GUIVS.instance.getControl().getC().test(23));
+            GUIVS.adminAnsicht();
+            /*
             GUIVS.instance.setMe
             (
                     //TODO Client.login gibt userobjekt zurück
-                GUIVS.instance.control.getC().loginUser(tfUsername.getText(),pfPassword.getText())
+                GUIVS.instance.getControl().getC().loginUser(tfUsername.getText(),pfPassword.getText())
                     
             );
             
@@ -68,8 +68,22 @@ public class loginFXMLController implements Initializable {
             
             if(GUIVS.instance.getMe().getLevel() == 1)
             {
-                //TODO: öffne Useransicht
-                GUIVS.userAnsicht();
+                for(Group g: GUIVS.instance.getControl().getC().getGroups())
+                {
+                    if(g.getModerator().equals(GUIVS.instance.getMe()))
+                    {
+                        GUIVS.instance.setIsMod(true);
+                        break;
+                    }
+                }
+                if(GUIVS.instance.isMod())
+                {
+                    GUIVS.adminAnsicht();
+                }
+                else
+                {
+                    GUIVS.userAnsicht();
+                }
             }
             else if(GUIVS.instance.getMe().getLevel() == 2)
             {
@@ -80,7 +94,7 @@ public class loginFXMLController implements Initializable {
             {
                 throw new IllegalPermissionLevelException();
             }
-    */
+*/
         }
         catch(IllegalCharacterException icex)
         {

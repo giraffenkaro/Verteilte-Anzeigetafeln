@@ -5,6 +5,7 @@
  */
 package formulare;
 
+import database.objects.Message;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -25,7 +26,15 @@ public class BearbeitenFXMLController implements Initializable {
     @FXML private TextArea taNachricht;
     @FXML private Button bAbbrechen;
     @FXML private Button bSpeichern;
-    
+    private Message m;
+
+    public Message getM() {
+        return m;
+    }
+
+    public void setM(Message m) {
+        this.m = m;
+    }
     
    
     

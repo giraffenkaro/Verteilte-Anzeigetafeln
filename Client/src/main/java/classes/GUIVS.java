@@ -13,7 +13,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import database.*;
 import database.objects.*;
+import java.util.ArrayList;
 import javafx.stage.Modality;
+import anzeigetafel.*;
+import formulare.BearbeitenFXMLController;
 
 /**
  *
@@ -22,7 +25,11 @@ import javafx.stage.Modality;
 public class GUIVS extends Application {
     
     public static GUIVS instance;
-    public Control control;
+    private Control control;
+
+    public Control getControl() {
+        return control;
+    }
     public GUIVS()
     {
             instance = this;
@@ -30,6 +37,15 @@ public class GUIVS extends Application {
             
     }
     private User me = null;
+    private boolean isMod = false;
+
+    public boolean isMod() {
+        return isMod;
+    }
+
+    public void setIsMod(boolean isMod) {
+        this.isMod = isMod;
+    }
     
     public void setMe(User me)
     {
@@ -68,11 +84,13 @@ public class GUIVS extends Application {
         vtStage.showAndWait();
     }
     
-     public static void bearbeiteNachricht() throws Exception
+     public static void bearbeiteNachricht(Message m) throws Exception
     {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(GUIVS.class.getResource("/formulare/bearbeitenFXML.fxml"));
         Parent p = loader.load();
+        BearbeitenFXMLController mc = loader.<BearbeitenFXMLController>getController();
+        mc.setM(m);
         
         Scene vtScene = new Scene(p);
         Stage vtStage = new Stage();
@@ -115,6 +133,26 @@ public class GUIVS extends Application {
         vtStage.showAndWait();
     }
     
+        public static void oeffneAnzeigetafel(Group g, ArrayList<Message> m) throws Exception
+        {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(GUIVS.class.getResource("/anzeigetafel/Anzeigetafel.fxml"));
+        
+        Parent p = loader.load();
+        
+        //ÜÜbergeben von ArrayList<Messages> an Anzeigetafel
+        AnzeigetafelFXMLController mc = loader.<AnzeigetafelFXMLController>getController();
+        mc.setM(m);
+        
+
+        Scene vtScene = new Scene(p);
+        Stage vtStage = new Stage();
+        
+        vtStage.setTitle("Anzeigetafel: " + g.getName());
+        
+        vtStage.setScene(vtScene);
+        vtStage.showAndWait();
+    }
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/guivs/loginFXML.fxml"));

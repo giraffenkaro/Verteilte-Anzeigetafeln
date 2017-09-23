@@ -30,6 +30,7 @@ public class AnzeigetafelFXMLController implements Initializable {
     
     @FXML
     private VBox vbox;
+   
     
     @FXML
     private ScrollPane scrollpane;
@@ -40,16 +41,25 @@ public class AnzeigetafelFXMLController implements Initializable {
     @FXML
     private Label lTafel;
     
+    private ArrayList<Message> m;
+
+    public ArrayList<Message> getM() {
+        return m;
+    }
+
+    public void setM(ArrayList<Message> m) {
+        this.m = m;
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
         ArrayList<Nachrichtenbox> c = new ArrayList();
         
-        for(int i = 0; i < 100; i++)
+        for(Message me: m)
         {
-            c.add(new Nachrichtenbox());
+            c.add(new Nachrichtenbox(me));
         }
-
         
         vbox.getChildren().addAll(c);
         
@@ -59,17 +69,6 @@ public class AnzeigetafelFXMLController implements Initializable {
         scrollpane.setFitToHeight(true);
         scrollpane.setFitToWidth(true);
         
-
-        
-      /*  for(int i = 0; i < 100; i++)
-        {
-             vbox.getChildren().add(new Nachrichtenbox());
-             vbox.getChildren().addAll(c);
-             //Abstand erhoehen
-             vbox.getChildren().get(i).setStyle("-fx-padding: 4 4 4 4");
-             
-        }
-       */
         
     }    
     
