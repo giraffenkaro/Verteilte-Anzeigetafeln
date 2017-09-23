@@ -1,4 +1,4 @@
-package rmiconnections;
+package rmiinterface;
 
 import database.objects.*;
 import java.rmi.Remote;
@@ -31,4 +31,5 @@ public interface Functions extends Remote
     ArrayList<Message> getMessagesByGroup(Group g) throws Exception;
     void saveMessage(Message message) throws Exception;
     User loginUser(String username, String password) throws Exception;
+
 }

@@ -1,14 +1,16 @@
 import java.rmi.registry.Registry;
 import java.rmi.registry.LocateRegistry;
-import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+
 import database.Database;
 import database.exceptions.DatabaseConnectionException;
+
 import database.objects.Board;
 import database.objects.Group;
 import database.objects.Message;
 import database.objects.User;
-import java.util.ArrayList;
+import rmiinterface.Functions;
 import threads.ServerThread;
 
 
@@ -23,6 +25,7 @@ public class Server implements Functions
             db = new Database();
         }catch (DatabaseConnectionException e){}
     }
+
 
     @Override
     public User getUserById(int id) throws Exception {

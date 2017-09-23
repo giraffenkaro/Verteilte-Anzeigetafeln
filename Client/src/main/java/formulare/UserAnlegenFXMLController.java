@@ -64,7 +64,7 @@ public class UserAnlegenFXMLController implements Initializable
                tfPasswort.getText(), 
                rbUser.isSelected() ? Control.permission.USER.ordinal():Control.permission.ADMIN.ordinal());
        try{
-        GUIVS.instance.control.getC().saveUser(neuerUser);
+        //GUIVS.instance.control.getC().saveUser(neuerUser);
        }catch(Exception e){}
     }
     
